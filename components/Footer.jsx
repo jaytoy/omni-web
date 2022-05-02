@@ -31,7 +31,7 @@ const Footer = () => {
                         </Link>
                     </div>
                     <p className="mt-8 text-base md:mt-0 md:order-1">
-                        &copy; <span>GamesKart</span>{' '}
+                        &copy; <span>GameStart</span>{' '}
                         {new Date().getFullYear()}
                     </p>
                 </div>

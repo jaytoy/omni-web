@@ -1,6 +1,10 @@
 import Image from 'next/image';
+import { useDispatch } from 'react-redux';
+import { addToCart } from '../redux/cart.slice';
 
 const ProductCard = ({ product }) => {
+  const dispatch = useDispatch();
+
   return (
     <div key={product.id}>
       <div className="relative">
@@ -16,12 +20,12 @@ const ProductCard = ({ product }) => {
       </div>
       
       <div className="mt-6">
-        <a
-          href={product.href}
+        <button
+          onClick={() => dispatch(addToCart(product))}
           className="relative flex bg-gray-300 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-indigo-500 hover:text-white"
         >
           Add to Cart<span className="sr-only">, {product.name}</span>
-        </a>
+        </button>
       </div>
     </div>
   );
