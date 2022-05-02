@@ -1,6 +1,5 @@
 import Head from 'next/head'
-import Image from 'next/image'
-import styles from '../styles/Home.module.css'
+import CategoryCard from '../components/CategoryCard'
 
 export default function Home() {
   return (
@@ -11,8 +10,16 @@ export default function Home() {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main>
-        <h1>Shopping Cart</h1>
+      <main className="max-w-8xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-3 lg:gap-x-8">
+          <CategoryCard image="https://imgur.com/uKQqsuA.png" name="Xbox" />
+          <CategoryCard image="https://imgur.com/3Y1DLYC.png" name="PS5" />
+          <CategoryCard image="https://imgur.com/Dm212HS.png" name="Switch" />
+        </div>
+        <div className="mt-10 space-y-12 lg:space-y-0 lg:grid lg:grid-cols-2 lg:gap-x-8">
+          <CategoryCard image="https://imgur.com/qb6IW1f.png" name="PC" />
+          <CategoryCard image="https://imgur.com/HsUfuRU.png" name="Accessories" />
+        </div>
       </main>
       
     </div>
