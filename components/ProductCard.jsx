@@ -13,8 +13,8 @@ const ProductCard = ({ product }) => {
         </div>
 
         <div className="mt-4 flex items-center justify-between text-base font-medium text-gray-900">
-          <h3>{product.product}</h3>
-          <p>$ {product.price}</p>
+          <h3 className='flex-grow truncate'>{product.product}</h3>
+          <p className='nowrap'>€{product.price}</p>
         </div>
         <p className="mt-1 text-md italic text-gray-500">{product.category}</p>
       </div>
@@ -22,9 +22,9 @@ const ProductCard = ({ product }) => {
       <div className="mt-6">
         <button
           onClick={() => dispatch(addToCart(product))}
-          className="relative flex bg-gray-300 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-indigo-500 hover:text-white"
+          className="relative w-full bg-gray-300 border border-transparent rounded-md py-2 px-8 items-center justify-center text-sm font-medium text-gray-900 hover:bg-indigo-500 hover:text-white"
         >
-          Add to Cart<span className="sr-only">, {product.name}</span>
+          Add to Cart
         </button>
       </div>
     </div>
