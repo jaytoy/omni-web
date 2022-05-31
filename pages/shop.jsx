@@ -19,9 +19,11 @@ const ShopPage = ({ products }) => {
   );
 };
 
-export default ShopPage;
-
 export async function getStaticProps() {
-  const products = await getProducts();
+  // const products = await getProducts();
+  const res = await fetch('http://127.0.0.1:8080/products');
+  const products = await res.json();
   return { props: { products } };
 }
+
+export default ShopPage;
