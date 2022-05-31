@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 import ProductCard from '../../components/ProductCard';
-import { getProductsByCategory } from '../api/products/[category]';
+import { getProductsByCategory } from '../api/product/[category]';
 
 const CategoryPage = ({ products }) => {
   const router = useRouter();
