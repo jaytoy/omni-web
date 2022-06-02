@@ -26,18 +26,25 @@ const CartPage = () => {
     // Stop the form from submitting and refreshing the page.
     event.preventDefault();
 
-    // Get data from the form.
+    // Get data from the cart.
+    // Transform the data format.
     const data = {
-      data: event.target.total
+      order_items: Object.entries(cart.cartItems).map(([_, {price, product, quantity}]) => ({
+        name: product,
+        quantity: quantity,
+        single_price: price,
+      })),
+      status: "accepted",
+      total_price: parseFloat(getTotalPrice()),
     }
-
-    console.log(data)
 
     // Send the data to the server in JSON format.
     const JSONdata = JSON.stringify(data);
 
     // API endpoint where we send form data.
-    const endpoint = '/api/order';
+    // const endpoint = '/api/order';
+    const endpoint = 'http://127.0.0.1:8080/order';
+
 
     // Form the request for sending data to the server.
     const options = {
