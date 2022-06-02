@@ -16,24 +16,61 @@ const CartPage = () => {
   }
 
   const getTotalPrice = () => {
-    return cart.reduce(
+    return cart.cartItems.reduce(
       (accumulator, item) => accumulator + item.quantity * item.price,
       0
     ).toFixed(2);
   };
 
+  const submitOrder = async (event) => {
+    // Stop the form from submitting and refreshing the page.
+    event.preventDefault();
+
+    // Get data from the form.
+    const data = {
+      data: event.target.total
+    }
+
+    console.log(data)
+
+    // Send the data to the server in JSON format.
+    const JSONdata = JSON.stringify(data);
+
+    // API endpoint where we send form data.
+    const endpoint = '/api/order';
+
+    // Form the request for sending data to the server.
+    const options = {
+      // The method is POST because we are sending data.
+      method: 'POST',
+      // Tell the server we're sending JSON.
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      // Body of the request is the JSON data we created above.
+      body: JSONdata,
+    }
+
+    // Send the form data to our forms API on Vercel and get a response.
+    const response = await fetch(endpoint, options)
+
+    // Get the response data from server as JSON.
+    // If server returns the name submitted, that means the form works.
+    const result = await response.json()
+    
+  }
+
   return (
     <div className="bg-white">
       <div className="max-w-2xl mx-auto pt-16 pb-24 px-4 sm:px-6 lg:max-w-7xl lg:px-8">
         <h1 className="text-3xl font-extrabold tracking-tight text-gray-900 sm:text-4xl">Shopping Cart</h1>
-        <form className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start xl:gap-x-16">
+        <form onSubmit={(e) => submitOrder(e)} className="mt-12 lg:grid lg:grid-cols-12 lg:gap-x-12 lg:items-start xl:gap-x-16">
           <section aria-labelledby="cart-heading" className="lg:col-span-7">
-            
             {cart.length === 0 ? (
                 <h1>Your Cart is Empty!</h1>
             ) : (
                 <ul role="list" className="border-t border-b border-gray-200 divide-y divide-gray-200">
-                    {cart.map((item, itemIdx) => (
+                    {cart.cartItems.map((item, itemIdx) => (
                     <li key={item.id} className="flex py-6 sm:py-10">
                         <div className="flex-shrink-0">
                         <Image src={item.image} alt="" height="90" width="65" className="w-24 h-24 rounded-md object-center object-cover sm:w-48 sm:h-48" />
@@ -120,7 +157,7 @@ const CartPage = () => {
             <dl className="mt-6 space-y-4">
               <div className="flex items-center justify-between">
                 <dt className="text-sm text-gray-600">Subtotal</dt>
-                <dd className="text-sm font-medium text-gray-900">${getTotalPrice()}</dd>
+                <dd className="text-sm font-medium text-gray-900">€{getTotalPrice()}</dd>
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="flex items-center text-sm text-gray-600">
@@ -134,7 +171,7 @@ const CartPage = () => {
               </div>
               <div className="border-t border-gray-200 pt-4 flex items-center justify-between">
                 <dt className="text-base font-medium text-gray-900">Order total</dt>
-                <dd className="text-base font-medium text-gray-900">${getTotalPrice()}</dd>
+                <dd className="text-base font-medium text-gray-900">€{getTotalPrice()}</dd>
               </div>
             </dl>
 

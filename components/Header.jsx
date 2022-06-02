@@ -8,7 +8,7 @@ export default function Header() {
 
     // Getting the count of items
     const getItemsCount = () => {
-        return cart.reduce((accumulator, item) => accumulator + item.quantity, 0);
+        return cart.cartItems.reduce((accumulator, item) => accumulator + item.quantity, 0);
     };
 
     return (

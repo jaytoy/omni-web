@@ -1,5 +1,5 @@
 import ProductCard from '../components/ProductCard';
-import { getProducts } from './api/products/index';
+import { getProducts } from './api/product/index';
 
 const ShopPage = ({ products }) => {
   return (
@@ -20,9 +20,9 @@ const ShopPage = ({ products }) => {
 };
 
 export async function getStaticProps() {
-  // const products = await getProducts();
-  const res = await fetch('http://127.0.0.1:8080/products');
-  const products = await res.json();
+  const products = await getProducts();
+  // const res = await fetch('http://127.0.0.1:8080/products');
+  // const products = await res.json();
   return { props: { products } };
 }
 
