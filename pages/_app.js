@@ -7,29 +7,29 @@ import "../styles/globals.css";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <Provider store={store}>
-      {/* Google tag (gtag.js) */}
+    <>
       <Script
         strategy="lazyOnload"
-        src="https://www.googletagmanager.com/gtag/js?id=G-K73BZPLFLQ"
+        src={`https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}`}
       />
-      <Script id="google-analytics" strategy="lazyOnload">
+      <Script strategy="lazyOnload">
         {`
           window.dataLayer = window.dataLayer || [];
           function gtag(){dataLayer.push(arguments);}
           gtag('js', new Date());
   
-          gtag('config', '${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS}', {
-            page_path: window.location.pathname,
-          });
+          gtag('config', ${process.env.NEXT_PUBLIC_GOOGLE_ANALYTICS});
         `}
       </Script>
-      <div>
-        <Header />
-        <Component {...pageProps} />
-        <Footer />
-      </div>
-    </Provider>
+
+      <Provider store={store}>
+        <div>
+          <Header />
+          <Component {...pageProps} />
+          <Footer />
+        </div>
+      </Provider>
+    </>
   );
 }
 
